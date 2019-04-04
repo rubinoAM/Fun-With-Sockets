@@ -18,6 +18,15 @@
                 data:'Thank you!'
             })
         })
+
+        socket.on('ping',()=>{
+            console.log("PING");
+        });
+
+        socket.on('pong',(latency)=>{
+            console.log(latency);
+            console.log("PONG");
+        });
     </script>
 </body>
 </html>

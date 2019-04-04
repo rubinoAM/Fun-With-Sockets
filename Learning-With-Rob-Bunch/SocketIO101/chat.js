@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
 const socketIo = require('socket.io');
 
+const app = express();
 app.use(express.static(__dirname + '/public'));
 const expressServer = app.listen(7773);
 const io = socketIo(expressServer);
