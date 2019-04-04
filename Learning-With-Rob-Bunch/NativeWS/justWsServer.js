@@ -13,7 +13,10 @@ wss.on('headers',(headers,req)=>{
 })
 
 wss.on('connection',(ws,req)=>{
-    ws.send('Welcome to the jungle.')
+    ws.send('Welcome to the jungle!')
+    ws.on('message',(msg)=>{
+        console.log(msg);
+    })
 })
 
 server.listen(9101);

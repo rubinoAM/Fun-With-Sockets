@@ -10,6 +10,14 @@
     <script>
         let ws = new WebSocket('ws://localhost:9101');
         console.log(ws);
+
+        ws.onopen = (e)=>{
+            ws.send("We got fun and games!");
+        }
+
+        ws.onmessage = (e)=>{
+            console.log(e)
+        }
     </script>
 </body>
 </html>
