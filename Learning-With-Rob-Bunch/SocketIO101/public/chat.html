@@ -21,6 +21,10 @@
                         <input class="btn btn-primary" type="submit" value="Send" />
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
                 <ul id="messages"></ul>
             </div>
         </div>
@@ -44,6 +48,11 @@
             socket.emit('newMsgToServer',{
                 text: newMsg,
             })
+        })
+
+        socket.on('msgToClients',(msg)=>{
+            //console.log(msg);
+            document.querySelector('#messages').innerHTML += `<li>${msg.text}</li>`;
         })
         /*socket.on('ping',()=>{
             console.log("PING");
