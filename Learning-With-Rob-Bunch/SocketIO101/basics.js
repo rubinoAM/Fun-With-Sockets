@@ -8,7 +8,7 @@ const server = http.createServer((req,res)=>{
 const io = socketIo(server);
 
 io.on('connection',(socket)=>{
-    socket.emit('Welcome to the jungle!');
+    socket.emit('welcome','Welcome to the jungle!');
     socket.on('message',(msg)=>{
         console.log(msg);
     });

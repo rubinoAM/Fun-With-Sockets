@@ -5,10 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 </head>
 <body>
     <script>
-            
+        const socket = io('http://localhost:7772');
+        
+        socket.on('connect',(e)=>{
+            socket.on('welcome',(msg)=>{
+                console.log(msg);
+            })
+
+            socket.emit('message',{
+                data:'We got fun and games!',
+            })
+        })
     </script>
 </body>
 </html>
