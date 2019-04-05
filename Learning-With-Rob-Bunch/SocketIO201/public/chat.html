@@ -30,38 +30,6 @@
         </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io('http://localhost:7773');
-
-        socket.on('dataFromServer',(fromData)=>{
-            console.log(fromData);
-            socket.emit('dataToServer', {
-                data:'Thank you!'
-            })
-        })
-
-        document.querySelector('#msg-form').addEventListener('submit',(e)=>{
-            e.preventDefault();
-            //console.log("SUBMITTED")
-            const newMsg = document.querySelector('#user-msg').value;
-            //console.log(newMsg);
-            socket.emit('newMsgToServer',{
-                text: newMsg,
-            })
-        })
-
-        socket.on('msgToClients',(msg)=>{
-            //console.log(msg);
-            document.querySelector('#messages').innerHTML += `<li>${msg.text}</li>`;
-        })
-        /*socket.on('ping',()=>{
-            console.log("PING");
-        });
-
-        socket.on('pong',(latency)=>{
-            console.log(latency);
-            console.log("PONG");
-        });*/
-    </script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
