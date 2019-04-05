@@ -14,10 +14,14 @@ io.on('connection',(socket)=>{ //Root Namespace
     socket.on('dataToServer',(toData)=>{
         console.log(toData);
     })
+    socket.join('level1');
+    io.of('/').to('level1').emit('joined',`${socket.id}: Here I am. Rock you like a hurricane.`);
 });
 
-//Socket for /admin
-io.of('/admin').on('connection',(socket)=>{
+//Server Socket for /admin
+const adminNamespace = io.of('/admin');
+
+adminNamespace.on('connection',(socket)=>{
     console.log("!!!!");
-    io.of('/admin').emit('welcome',"Welcome to the admin channel!");
+    adminNamespace.emit('welcome',"Welcome to the admin channel!");
 });
