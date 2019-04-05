@@ -7,18 +7,17 @@ const expressServer = app.listen(7773);
 const io = socketIo(expressServer);
 
 io.on('connection',(socket)=>{
-    socket.emit('dataFromServer',{
-        data:'Welcome!'
-    });
+    socket.emit('dataFromServer',{data:'Welcome!'});
 
     socket.on('dataToServer',(toData)=>{
-        console.log(toData);
+        //console.log(toData);
     })
 
     socket.on('newMsgToServer',(msg)=>{
-        //console.log(msg);
-        io.emit('msgToClients',{
-            text:msg.text,
-        });
+        io.emit('msgToClients',{text:msg.text});
     });
+});
+
+io.of('/admin').on('connection',(socket)=>{
+    console.log("!!!!");
 });
