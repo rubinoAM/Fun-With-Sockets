@@ -1,7 +1,7 @@
 function joinRoom(roomName){
     nsSocket.emit('joinRoom',roomName,(newNumberOfMembers)=>{
         //Update room member total
-        document.querySelector('.curr-room-num-users').innerHTML = `${newNumberOfMembers} <span class="glyphicon glyphicon-user"></span>`
+        document.querySelector('.curr-room-num-users').innerHTML = `${newNumberOfMembers} <span class="glyphicon glyphicon-user"></span>`;
     });
 
     nsSocket.on('historyUpdate',(history)=>{
@@ -14,5 +14,10 @@ function joinRoom(roomName){
         })
 
         messagesUl.scrollTo(0,messagesUl.scrollHeight);
+    })
+
+    nsSocket.on('updateUsers',(numUsers)=>{
+        document.querySelector('.curr-room-num-users').innerHTML = `${numUsers} <span class="glyphicon glyphicon-user"></span>`;
+        document.querySelector('.curr-room-text').innerText = roomName;
     })
 }

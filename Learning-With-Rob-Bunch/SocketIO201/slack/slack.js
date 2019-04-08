@@ -30,14 +30,15 @@ namespaces.forEach((namespace)=>{
         nsSocket.emit('nsRoomLoad',namespaces[0].rooms);
         nsSocket.on('joinRoom',(roomJoin,numUserCB)=>{
             nsSocket.join(roomJoin);
-            io.of('/wiki').in(roomJoin).clients((err,clients)=>{
-                numUserCB(clients.length);
-            })
             //Update History
             const nsRoom = namespace.rooms.find((room)=>{
                 return room.title === roomJoin;
             })
             nsSocket.emit('historyUpdate',nsRoom.history);
+            //Number of Users
+            io.of('/wiki').in(roomJoin).clients((err,clients)=>{
+                io.of('/wiki').in(roomJoin).emit('updateUsers',clients.length);
+            });
         })
 
         nsSocket.on('newMsgToServer',(msg)=>{
