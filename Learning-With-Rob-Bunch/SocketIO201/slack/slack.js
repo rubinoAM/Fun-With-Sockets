@@ -37,7 +37,15 @@ namespaces.forEach((namespace)=>{
         })
 
         nsSocket.on('newMsgToServer',(msg)=>{
-            console.log(msg);
+            const fullMsg = {
+                text:msg,
+                time:Date.now(),
+                username:"uname",
+                avatar:'https://via.placeholder.com/30',
+            }
+
+            const roomTitle = Object.keys(nsSocket.rooms)[1];
+            io.of('/wiki').to(roomTitle).emit('msgToClients',fullMsg);
         })
     })
 })

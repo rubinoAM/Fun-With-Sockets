@@ -25,13 +25,27 @@ function joinNs(endpoint){
         joinRoom(topRoomName);
     })
     
-    nsSocket.on('messageToClients',(msg)=>{
-        document.querySelector('#messages').innerHTML += `<li>${msg.text}</li>`
+    nsSocket.on('msgToClients',(msg)=>{
+        const newMsg = buildHTMLMsg(msg);
+        console.log(newMsg);
+        document.querySelector('#messages').innerHTML += newMsg;
     })
 
     document.querySelector('#userInput').addEventListener('submit',(e)=>{
         e.preventDefault();
         const newMsg = document.querySelector('#userMessage').value;
-        nsSocket.emit('newMsgToServer',{text: newMsg});
+        nsSocket.emit('newMsgToServer',newMsg);
     });
+}
+
+function buildHTMLMsg(msg){
+    console.log(msg);
+    const newHTML = `<li>
+                        <div class="user-image"><img src="${msg.avatar}" /></div>
+                        <div class="user-message">
+                            <div class="user-name-time">${msg.username} <span>${msg.time}</span></div>
+                            <div class="message-text">${msg.text}</div>
+                        </div>
+                    </li>`;
+    return newHTML;
 }
