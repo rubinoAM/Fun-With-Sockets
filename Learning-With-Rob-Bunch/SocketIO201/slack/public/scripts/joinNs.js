@@ -29,9 +29,9 @@ function joinNs(endpoint){
         document.querySelector('#messages').innerHTML += `<li>${msg.text}</li>`
     })
 
-    document.querySelector('#messageForm').addEventListener('submit',(e)=>{
+    document.querySelector('#userInput').addEventListener('submit',(e)=>{
         e.preventDefault();
         const newMsg = document.querySelector('#userMessage').value;
-        socket.emit('newMsgToServer',{text: newMsg});
+        nsSocket.emit('newMsgToServer',{text: newMsg});
     });
 }

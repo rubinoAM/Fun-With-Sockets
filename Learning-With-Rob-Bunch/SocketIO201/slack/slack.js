@@ -35,5 +35,9 @@ namespaces.forEach((namespace)=>{
             })
             //History
         })
+
+        nsSocket.on('newMsgToServer',(msg)=>{
+            console.log(msg);
+        })
     })
 })
