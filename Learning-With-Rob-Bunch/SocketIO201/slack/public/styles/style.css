@@ -16,6 +16,7 @@ body{
     border-radius:10px;
     cursor:pointer;
     width:45px;
+    height:45px;
 }
 
 .room-list{

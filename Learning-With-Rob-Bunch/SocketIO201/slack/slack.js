@@ -10,12 +10,16 @@ const io = socketIo(expressServer);
 
 //Main Connection
 io.on('connection',(socket)=>{ //Root Namespace
-    socket.emit('dataFromServer',{data:'Welcome!'});
-    socket.on('dataToServer',(toData)=>{
-        console.log(toData);
+    //Array to send back with images and endpoints for each namespace
+    let nsData = namespaces.map((ns)=>{
+        return {
+            img: ns.img,
+            endpoint: ns.endpoint,
+        }
     })
-    socket.join('level1');
-    io.of('/').to('level1').emit('joined',`${socket.id}: Here I am. Rock you like a hurricane.`);
+
+    //Send data to client
+    socket.emit('nsList',nsData);
 });
 
 //Namespaces
