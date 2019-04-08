@@ -1,6 +1,7 @@
 //Modules
 const express = require('express');
 const socketIo = require('socket.io');
+let namespaces = require('./data/namespaces');
 
 //Server
 const app = express();
