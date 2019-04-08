@@ -11,7 +11,7 @@ let linuxNS = new Namespace(2,'Linux','https://upload.wikimedia.org/wikipedia/co
 /*Rooms
     -The main room will always be 0 */
 wikiNS.addRoom(new Room(0,'New Articles','Wiki'));
-wikiNS.addRoom(new Room(1,'Editors','Wiki'));
+wikiNS.addRoom(new Room(1,'Editors','Wiki',true));
 wikiNS.addRoom(new Room(2,'Other','Wiki'));
 
 mozNS.addRoom(new Room(0,'Firefox','Mozilla'));

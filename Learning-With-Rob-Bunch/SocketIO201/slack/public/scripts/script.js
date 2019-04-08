@@ -16,8 +16,29 @@ socket.on('nsList',(nsData)=>{
     Array.from(document.getElementsByClassName('namespace')).forEach((elem)=>{
         elem.addEventListener('click',(e)=>{
             const nsEndpoint = elem.getAttribute('ns');
-            console.log(`${nsEndpoint} CLICKED`)
         })
+    })
+
+    const nsSocket = io('http://localhost:7773/wiki');
+    nsSocket.on('nsRoomLoad',(nsRooms)=>{
+        let roomList = document.querySelector('.room-list');
+        roomList.innerHTML = "";
+        nsRooms.forEach((room)=>{
+            let glyph;
+            if(room.privateRoom){
+                glyph = 'lock';
+            } else {
+                glyph = 'globe';
+            }
+
+            roomList.innerHTML += `<li class="room"><span class="glyphicon glyphicon-${glyph}"></span>${room.title}</li>`;
+        })
+
+        Array.from(document.getElementsByClassName('room')).forEach((elem)=>{
+            elem.addEventListener('click',(e)=>{
+                console.log("MEOW")
+            })
+        });
     })
 })
 
@@ -25,9 +46,9 @@ socket.on('dataFromServer',(fromData)=>{
     socket.emit('dataToServer', {data:'Thank you!'});
 });
 
-document.querySelector('#msg-form').addEventListener('submit',(e)=>{
+document.querySelector('#userInput').addEventListener('submit',(e)=>{
     e.preventDefault();
-    const newMsg = document.querySelector('#user-msg').value;
+    const newMsg = document.querySelector('#userMessage').value;
     socket.emit('newMsgToServer',{text: newMsg});
 });
 
