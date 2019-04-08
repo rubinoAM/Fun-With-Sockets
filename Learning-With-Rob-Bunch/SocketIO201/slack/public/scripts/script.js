@@ -1,4 +1,5 @@
 const socket = io('http://localhost:7773'); //Root endpoint- '/'
+let nsSocket = "";
 
 //Namespaces
 socket.on('nsList',(nsData)=>{

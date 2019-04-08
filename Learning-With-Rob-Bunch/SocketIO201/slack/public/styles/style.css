@@ -76,7 +76,7 @@ body{
     padding-left:30px;
 }
 
-.message-form{
+#messageForm{
     margin:0 0 10px;
     position:absolute;
     bottom:0;

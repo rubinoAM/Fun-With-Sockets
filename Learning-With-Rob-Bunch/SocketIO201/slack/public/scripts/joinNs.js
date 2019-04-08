@@ -1,5 +1,5 @@
 function joinNs(endpoint){
-    const nsSocket = io(`http://localhost:7773${endpoint}`);
+    nsSocket = io(`http://localhost:7773${endpoint}`);
     nsSocket.on('nsRoomLoad',(nsRooms)=>{
         let roomList = document.querySelector('.room-list');
         roomList.innerHTML = "";
@@ -19,6 +19,10 @@ function joinNs(endpoint){
                 console.log("MEOW")
             })
         });
+
+        const topRoom = document.querySelector('.room');
+        const topRoomName = topRoom.innerText;
+        joinRoom(topRoomName);
     })
     
     nsSocket.on('messageToClients',(msg)=>{

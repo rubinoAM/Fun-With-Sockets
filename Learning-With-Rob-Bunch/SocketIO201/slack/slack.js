@@ -28,5 +28,12 @@ namespaces.forEach((namespace)=>{
     io.of(namespace.endpoint).on('connection',(nsSocket)=>{
         console.log(`${nsSocket.id} has joined ${namespace.endpoint}`)
         nsSocket.emit('nsRoomLoad',namespaces[0].rooms);
+        nsSocket.on('joinRoom',(room,numUserCB)=>{
+            nsSocket.join(room);
+            io.of('/wiki').in(room).clients((err,clients)=>{
+                numUserCB(clients.length);
+            })
+            //History
+        })
     })
 })
