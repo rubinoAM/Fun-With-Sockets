@@ -1,5 +1,7 @@
 const socket = io('http://localhost:7773'); //Root endpoint- '/'
-const socket2 = io('http://localhost:7773/admin'); //Endpoint- '/admin'
+const socket2 = io('http://localhost:7773/wiki');
+const socket3 = io('http://localhost:7773/mozilla');
+const socket4 = io('http://localhost:7773/linux');
 
 //Main Connection
 socket.on('dataFromServer',(fromData)=>{

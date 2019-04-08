@@ -11,7 +11,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-1 namespaces">
+            <div class="col-sm-1 namespaces">
                 <div class="namespace" ns="/wiki">
                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/103px-Wikipedia-logo-v2.svg.png" />
                 </div>
@@ -22,7 +22,7 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" />
                 </div>
             </div>
-            <div class="col-2 rooms">
+            <div class="col-sm-2 rooms">
                 <h3>Rooms</h3>
                 <ul class="room-list">
                     <li onclick="joinRoom(1,2)">
@@ -33,10 +33,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-9 chat-panel">
+            <div class="col-sm-9 chat-panel">
                 <div class="row col-6 room-header">
                     <div class="col-sm-3">
-
+                        <span class="curr-room-text">Current Room</span>
+                        <span class="curr-room-num-users">Users <span class="glyphicon glyphicon-user"></span></span>
                     </div>
                     <div class="col-sm-3 search pull-right">
                         <span class="glyphicon glyphicon-search"></span>

@@ -1,7 +1,6 @@
 //Modules
 const express = require('express');
 const socketIo = require('socket.io');
-let namespaces = require('./data/namespaces');
 
 //Server
 const app = express();
@@ -19,10 +18,11 @@ io.on('connection',(socket)=>{ //Root Namespace
     io.of('/').to('level1').emit('joined',`${socket.id}: Here I am. Rock you like a hurricane.`);
 });
 
-//Server Socket for /admin
-const adminNamespace = io.of('/admin');
-
-adminNamespace.on('connection',(socket)=>{
-    console.log("!!!!");
-    adminNamespace.emit('welcome',"Welcome to the admin channel!");
-});
+//Namespaces
+let namespaces = require('./data/namespaces');
+namespaces.forEach((namespace)=>{
+    const nsEndpoint = io.of(namespace.endpoint);
+    nsEndpoint.on('connection',(socket)=>{
+        console.log(`${socket.id} has joined ${namespace.endpoint}`)
+    })
+})
