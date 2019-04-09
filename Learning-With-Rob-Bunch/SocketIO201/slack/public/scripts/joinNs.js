@@ -31,7 +31,6 @@ function joinNs(endpoint){
     
     nsSocket.on('msgToClients',(msg)=>{
         const newMsg = buildHTMLMsg(msg);
-        console.log(newMsg);
         document.querySelector('#messages').innerHTML += newMsg;
     })
 
@@ -40,7 +39,6 @@ function joinNs(endpoint){
 
 function buildHTMLMsg(msg){
     const convertedDate = new Date(msg.time).toLocaleString();
-    console.log(msg);
     const newHTML = `<li>
                         <div class="user-image"><img src="${msg.avatar}" /></div>
                         <div class="user-message">
