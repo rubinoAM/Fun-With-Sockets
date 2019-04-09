@@ -29,8 +29,11 @@ namespaces.forEach((namespace)=>{
         //console.log(`${nsSocket.id} has joined ${namespace.endpoint}`)
         nsSocket.emit('nsRoomLoad',namespace.rooms);
         nsSocket.on('joinRoom',(roomJoin,numUserCB)=>{
+            //Leave
             const roomLeave = Object.keys(nsSocket.rooms)[1];
             nsSocket.leave(roomLeave);
+            updateUsers(namespace,roomLeave);
+            //Join
             nsSocket.join(roomJoin);
             //Update History
             const nsRoom = namespace.rooms.find((room)=>{
@@ -38,9 +41,7 @@ namespaces.forEach((namespace)=>{
             })
             nsSocket.emit('historyUpdate',nsRoom.history);
             //Number of Users
-            io.of(namespace.endpoint).in(roomJoin).clients((err,clients)=>{
-                io.of(namespace.endpoint).in(roomJoin).emit('updateUsers',clients.length);
-            });
+            updateUsers(namespace,roomJoin);
         })
 
         nsSocket.on('newMsgToServer',(msg)=>{
@@ -59,3 +60,9 @@ namespaces.forEach((namespace)=>{
         })
     })
 })
+
+function updateUsers(namespace,roomJoin){
+    io.of(namespace.endpoint).in(roomJoin).clients((err,clients)=>{
+        io.of(namespace.endpoint).in(roomJoin).emit('updateUsers',clients.length);
+    });
+}
