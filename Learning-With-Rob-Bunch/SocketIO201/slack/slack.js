@@ -27,17 +27,18 @@ let namespaces = require('./data/namespaces');
 namespaces.forEach((namespace)=>{
     io.of(namespace.endpoint).on('connection',(nsSocket)=>{
         console.log(`${nsSocket.id} has joined ${namespace.endpoint}`)
-        nsSocket.emit('nsRoomLoad',namespaces[0].rooms);
+        nsSocket.emit('nsRoomLoad',namespace.rooms);
         nsSocket.on('joinRoom',(roomJoin,numUserCB)=>{
             nsSocket.join(roomJoin);
             //Update History
             const nsRoom = namespace.rooms.find((room)=>{
+                console.log(room)
                 return room.title === roomJoin;
             })
             nsSocket.emit('historyUpdate',nsRoom.history);
             //Number of Users
-            io.of('/wiki').in(roomJoin).clients((err,clients)=>{
-                io.of('/wiki').in(roomJoin).emit('updateUsers',clients.length);
+            io.of(namespace.endpoint).in(roomJoin).clients((err,clients)=>{
+                io.of(namespace.endpoint).in(roomJoin).emit('updateUsers',clients.length);
             });
         })
 
@@ -53,7 +54,7 @@ namespaces.forEach((namespace)=>{
                 return room.title === roomTitle;
             })
             nsRoom.addMessage(fullMsg);
-            io.of('/wiki').to(roomTitle).emit('msgToClients',fullMsg);
+            io.of(namespace.endpoint).to(roomTitle).emit('msgToClients',fullMsg);
         })
     })
 })
