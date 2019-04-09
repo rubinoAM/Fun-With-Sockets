@@ -1,4 +1,9 @@
-const socket = io('http://localhost:7773'); //Root endpoint- '/'
+const username = prompt("What's your name?");
+const socket = io('http://localhost:7773',{
+    query: {
+        username: username,
+    }
+});
 let nsSocket = "";
 
 //Namespaces
