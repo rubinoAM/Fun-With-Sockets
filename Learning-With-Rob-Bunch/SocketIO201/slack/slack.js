@@ -26,13 +26,14 @@ io.on('connection',(socket)=>{ //Root Namespace
 let namespaces = require('./data/namespaces');
 namespaces.forEach((namespace)=>{
     io.of(namespace.endpoint).on('connection',(nsSocket)=>{
-        console.log(`${nsSocket.id} has joined ${namespace.endpoint}`)
+        //console.log(`${nsSocket.id} has joined ${namespace.endpoint}`)
         nsSocket.emit('nsRoomLoad',namespace.rooms);
         nsSocket.on('joinRoom',(roomJoin,numUserCB)=>{
+            const roomLeave = Object.keys(nsSocket.rooms)[1];
+            nsSocket.leave(roomLeave);
             nsSocket.join(roomJoin);
             //Update History
             const nsRoom = namespace.rooms.find((room)=>{
-                console.log(room)
                 return room.title === roomJoin;
             })
             nsSocket.emit('historyUpdate',nsRoom.history);

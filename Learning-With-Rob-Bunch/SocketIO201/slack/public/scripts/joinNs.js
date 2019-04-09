@@ -20,7 +20,7 @@ function joinNs(endpoint){
     
         Array.from(document.getElementsByClassName('room')).forEach((elem)=>{
             elem.addEventListener('click',(e)=>{
-                console.log("MEOW")
+                joinRoom(e.target.innerText);
             })
         });
 
