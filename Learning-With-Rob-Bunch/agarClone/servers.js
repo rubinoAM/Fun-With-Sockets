@@ -7,3 +7,12 @@ app.use(express.static(__dirname + '/public'));
 const socketIo = require('socket.io');
 const expressServer = app.listen('5052');
 const io = socketIo(expressServer);
+
+//Helmet
+const helmet = require('helmet');
+app.use(helmet());
+
+module.exports = {
+    app,
+    io
+}
